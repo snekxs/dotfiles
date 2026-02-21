@@ -27,7 +27,7 @@ require("lazy").setup({
    {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
-},{'folke/tokyonight.nvim'},{'vyfor/cord.nvim'},{"webhooked/kanso.nvim"},{"neovim/nvim-lspconfig"},
+},{'vyfor/cord.nvim'},{"webhooked/kanso.nvim"},{"neovim/nvim-lspconfig"},
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = {  },
