@@ -38,4 +38,14 @@ require("lazy").setup({
 require('lualine').setup{options = { theme = 'iceberg_dark'}}
 vim.cmd[[colorscheme kanso-ink]]
 require('cord').setup {{enabled=true},display={theme='catppuccin',flavor='accent'}}
+vim.lsp.config('rust_analyzer', {
+    settings = {
+      ['rust-analyzer'] = {
+        diagnostics = {
+          enable = false;
+        }
+      }
+    }
+  })
 
+vim.lsp.enable('rust_analyzer')
