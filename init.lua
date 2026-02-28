@@ -20,6 +20,8 @@ vim.opt.rtp:prepend(lazypath)
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+vim.o.number = true
+
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -27,7 +29,17 @@ require("lazy").setup({
    {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
-},{'vyfor/cord.nvim'},{"webhooked/kanso.nvim"},{"neovim/nvim-lspconfig"},
+},{'vyfor/cord.nvim'},{"baliestri/aura-theme",config = function(plugin)
+    vim.opt.rtp:append(plugin.dir .. "/packages/neovim")
+    vim.cmd([[colorscheme aura-dark]])
+  end},{"webhooked/kanso.nvim"},{
+    'nvim-telescope/telescope.nvim', version = '*',
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        -- optional but recommended
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    }
+},{"neovim/nvim-lspconfig"},
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = {  },
@@ -36,7 +48,7 @@ require("lazy").setup({
   }})
 
 require('lualine').setup{options = { theme = 'iceberg_dark'}}
-vim.cmd[[colorscheme kanso-ink]]
+vim.cmd[[colorscheme aura-dark]]
 require('cord').setup {{enabled=true},display={theme='catppuccin',flavor='accent'}}
 vim.lsp.config('rust_analyzer', {
     settings = {
