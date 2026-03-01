@@ -21,6 +21,11 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.o.number = true
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+})
 
 
 -- Setup lazy.nvim
@@ -32,7 +37,7 @@ require("lazy").setup({
 },{'vyfor/cord.nvim'},{"baliestri/aura-theme",config = function(plugin)
     vim.opt.rtp:append(plugin.dir .. "/packages/neovim")
     vim.cmd([[colorscheme aura-dark]])
-  end},{"webhooked/kanso.nvim"},{
+  end},{"webhooked/kanso.nvim"},{"mason-org/mason.nvim"},{"saghen/blink.cmp",version="*"},{"mason-org/mason-lspconfig.nvim"},{
     'nvim-telescope/telescope.nvim', version = '*',
     dependencies = {
         'nvim-lua/plenary.nvim',
@@ -50,14 +55,8 @@ require("lazy").setup({
 require('lualine').setup{options = { theme = 'iceberg_dark'}}
 vim.cmd[[colorscheme aura-dark]]
 require('cord').setup {{enabled=true},display={theme='catppuccin',flavor='accent'}}
-vim.lsp.config('rust_analyzer', {
-    settings = {
-      ['rust-analyzer'] = {
-        diagnostics = {
-          enable = false;
-        }
-      }
-    }
-  })
-
-vim.lsp.enable('rust_analyzer')
+require("mason").setup()
+require("mason-lspconfig").setup()
+require("blink.cmp").setup({
+  keymap = { preset = "enter" }, -- Tab to cycle, Enter to confirm like VS Code
+})
